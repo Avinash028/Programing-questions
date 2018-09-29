@@ -1,0 +1,48 @@
+// FIND ALL SUB-ARRAY WITH 0 SUM USING MAP .
+
+
+
+#include <iostream>
+#include<map>
+using namespace std;
+
+int main()
+{
+    int n;
+    cout << "enter size" << endl;
+    cin>>n;
+    int a[n];
+
+    for(int i=0;i<n;i++)
+        cin>>a[i];
+
+    int sum=0,flag=0;
+
+    map<int,int>m;
+
+    for(int i=0;i<n;i++)
+    {
+       sum=sum+a[i];
+
+       if(sum==0)                                                
+       {
+           cout<<"Sub-Array found at "<<0<<" - "<<i<<"\n";
+           flag=1;
+       }
+
+       if(m.find(sum)!=m.end())                                   
+       {
+           cout<<"\n\nAll sub-array with sum 0 \n";
+           cout<<"Sub-Array found at "<<m[sum]+1<<" - "<<i<<"\n";
+           flag=1;
+       }
+
+       else
+        m[sum]=i;     // INSERT INT MAP ( KEY-VALUE PAIR ).        
+
+    }
+
+     if(flag==0)
+            cout<<"No Sub-Array found.";
+    return 0;
+}
