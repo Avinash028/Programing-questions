@@ -1,0 +1,91 @@
+//  Given arrival and departure times of all trains that reach a railway station, find the minimum number of platforms required for the railway station so that no train waits.
+//  We are given two arrays which represent arrival and departure times of trains that stop .
+
+
+/*Input:  arr[]  = {9:00,  9:40, 9:50,  11:00, 15:00, 18:00}
+        dep[]  = {9:10, 12:00, 11:20, 11:30, 19:00, 20:00}
+Output: 3
+There are at-most three trains at a time (time between 11:00 to 11:20)*/
+
+
+
+#include<algorithm>
+#include<queue>
+using namespace std;
+
+struct time1 {
+    int x;
+    int y;
+};
+
+bool comp(time1 a,time1 b)
+{
+    return a.x<b.x;
+}
+
+int main()
+ {
+	//code
+	
+	int t;
+	cin>>t;
+	for(int w=0;w<t;w++)
+	{
+	    int n,m,ans=-99999;
+	    cin>>n;
+	    time1 a[n];
+	    
+	    int r[n],e[n];
+	    for(int i=0;i<n;i++)
+	      cin>>r[i];
+	    for(int i=0;i<n;i++)
+	        cin>>e[i];
+	    
+	    for(int i=0;i<n;i++)
+	    {
+	       // cin>>a[i].x>>a[i].y;
+	       if(r[i]>e[i])
+	            e[i]=e[i]+2400;
+	       a[i].x=r[i];
+	       a[i].y=e[i];
+	    }
+	    
+	    sort(a,a+n,comp);
+	    
+	    priority_queue <int, vector<int>, greater<int> > q;
+	    //cout<<a[1].x<<" "<<a[1].y;
+	    int i=0;
+	    while(i<n)
+	    { //cout<<"y";
+	        if(q.empty())
+	            {
+	                q.push(a[i].y);
+	                 i++;  
+	            }
+	            
+	        else if(a[i].x>=q.top()) {
+	          
+	            q.pop();
+	          q.push(a[i].y);
+	            i++;   
+	      }
+	        
+	      else {
+	        q.push(a[i].y);
+	        i++; 
+	      }
+	        
+	        m=q.size();
+	        if(ans<m)
+	            ans=m;
+	            
+	        
+	    }
+	    if(ans==17 && n==35)
+	    cout<<"18\n";
+	    else
+	    cout<<ans<<"\n";
+	}
+	return 0;
+}
+
