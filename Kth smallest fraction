@@ -1,0 +1,74 @@
+/*
+Examples:
+Input: A = [1, 2, 3, 5], K = 3
+Output: [2, 5]
+Explanation:
+The fractions to be considered in sorted order are:
+1/5, 1/3, 2/5, 1/2, 3/5, 2/3.
+The third fraction is 2/5.
+*/
+
+
+#include <iostream>
+#include<queue>
+using namespace std;
+
+struct number
+{
+    int i,j;
+    double v;
+    number(int a,int b,double f)
+    {
+        i=a;
+        j=b;
+        v=f;
+    }
+    number()
+    {
+        i=0;
+        j=0;
+        v=0.0;
+    }
+};
+
+struct compare {
+    bool operator()(number x,number y)
+    {
+        return x.v>y.v;                  // To keep element in increasing order. (smallest at the top) 
+    }
+};
+
+int main()
+{
+   cout << "Hello World\n" << endl; 
+   priority_queue<number,vector<number>,compare>q;
+  
+   
+   int n,k;
+   cin>>n>>k;
+   int a[n];
+   for(int i=0;i<n;i++)
+    cin>>a[i];
+    
+    for(int i=0;i<n;i++)
+    {
+        q.push(number(i,n-1,(double)(a[i])/a[n-1]));   //** 5/9=0, but 5.0/9=0.555 so convert numrator to double.
+        
+    }
+    
+    
+    while(k!=1)
+    {
+        number t;
+        t=q.top();
+        q.pop();
+        t.j--;
+        q.push(number(t.i,t.j,(double)(a[t.i])/a[t.j]));
+        
+        k--;
+    }
+    
+    cout<<a[q.top().i]<<" "<<a[q.top().j];
+   
+   return 0;
+}
