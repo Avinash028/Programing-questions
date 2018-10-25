@@ -1,0 +1,56 @@
+/*
+We are given an integer N. 
+We need to write a program to find the least positive integer X made up of only digits 9’s and 0’s, such that, X is a multiple of N.
+
+Input : N = 5
+Output : X = 90
+Exaplanation: 90 is the smallest number made up 
+of 9's and 0's which is divisible by 5.
+
+Input : N = 7
+Output : X = 9009
+Exaplanation: 9009 is smallest number made up 
+of 9's and 0's which is divisible by 7.
+
+*/
+
+
+#include<queue>
+#include <iostream>
+using namespace std;
+
+
+
+int main()
+{
+   int n;
+   cin>>n;
+   queue<string>q;
+   
+   q.push("9");
+   
+   int f=0;
+   while(!q.empty())
+   {
+       for(int i=0;i<q.size();i++)
+       {
+           string t=q.front();
+           if(stoi(t)%n==0)
+           {
+               f=1;
+               cout<<t<<"\n";
+               break;
+           }
+           q.pop();
+           
+           q.push(t+'0');
+           q.push(t+'9');
+           
+       }
+       
+       if(f==1)
+       break;
+   }
+   
+   return 0;
+}
