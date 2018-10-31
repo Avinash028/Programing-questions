@@ -1,0 +1,50 @@
+/*
+Given a string ‘str’ and an integer ‘k’, the task is to count the number of sub-strings of length ‘k’ which are comprised of the same character. 
+Given string contains only lowercase alphabets.
+
+Input: str = "aaaabbbccdddd", k=4
+Output: 2
+The sub-strings of length 4 which contain identical 
+characters are 'aaaa' and 'dddd'. So, the count is 2.
+
+Input: str = "aaaaaa", k=4
+Output: 3
+*/
+
+#include<map>
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    string s;
+    cin>>s;
+    int k;
+    cin>>k;
+    map<char,int>m;
+    for(int i=0;i<k;i++)
+    {
+        m[s[i]]++;
+    }
+    
+    int c=0;
+    if(m[s[0]]==k)
+        c++;
+        
+        int f=0;
+        for(int i=k;i<s.length();i++)
+        {
+            m[s[f++]]--;
+            if(m[s[f]]<=0)
+             m.erase(s[f]);
+             
+             m[s[i]]++;
+             
+             if(m[s[i]]==k)
+                c++;
+        }
+        
+        cout<<c<<"\n";
+    
+    return 0;
+}
