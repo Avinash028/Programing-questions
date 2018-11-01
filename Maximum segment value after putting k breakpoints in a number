@@ -1,0 +1,51 @@
+/*
+Given a large number as string s and an integer k which denotes the number of breakpoints we must put in the number k <= string length.
+The task is to find maximum segment value after putting exactly k breakpoints.
+
+Input : s = "8754", k = 2
+Output : Maximum number = 87
+Explanation : We need to two breakpoints. After
+putting the breakpoints, we get following options
+
+Input : s = "999", k = 1 
+Output : Maximum Segment Value = 99
+
+*/
+
+#include<map>
+#include <iostream>
+#include<string>
+using namespace std;
+
+int main()
+{
+    string s;
+    cin>>s;
+    int k;
+    cin>>k;
+    
+    int f=s.length()-k;
+    string r="";
+    for(int i=0;i<f;i++)
+        r+=s[i];
+        
+    int y=0,c=0;
+    y=stoi(r);
+    int m=-99999;
+    if(m<y)
+    m=y;
+    for(int i=f;i<s.length();i++)
+    {
+        r.erase(c++,1);
+        r+=s[i];
+        
+        y=stoi(r);
+        if(m<y)
+         m=y;
+    }
+    
+    cout<<m;
+    
+    
+    return 0;
+}
