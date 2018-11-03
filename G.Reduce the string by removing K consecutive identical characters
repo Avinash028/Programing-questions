@@ -1,0 +1,60 @@
+/*
+  Input: k = 2, str = “geeksforgeeks”
+  Output: gksforgks
+  After the removal of 2 consecutive “e” twice,
+  the string will get reduced to “gksforgks”.
+  Input: k = 3, str = “qddxxxd”
+  Output: q
+  Removal of “xxx” gives “qddd”.
+  Again, removal of “ddd” gives the final string “q” 
+*/
+
+#include<set>
+#include<stack>
+#include <iostream>
+#include<string>
+using namespace std;
+
+int j=0;
+stack<string>u;
+string rem(string s,int k)
+{  //cout<<"y";
+    string r="";
+    int c=0,f=0;
+    r+=s[0];
+    for(int i=1;s[i]!='\0';i++)
+    {
+        r+=s[i];
+        if(s[i]==s[i-1])
+            c++;
+        else
+         c=0;
+            
+            
+        if(c==k-1) {
+            r.erase(i-k+1,k);
+            f=1;
+        }
+        
+    }
+   //cout<<r<<"\n";
+   if(f==1)
+   {
+       r=rem(r,k);
+   }
+   
+   //u.push(r);
+   return r;
+   
+}
+
+int main()
+{
+    string s;
+    int k;
+    cin>>s>>k;
+    
+    cout<<rem(s,k);
+    //cout<<u.top();
+    return 0;
+}
