@@ -32,13 +32,13 @@ string rem(string s,int k)
             
             
         if(c==k-1) {
-            r.erase(i-k+1,k);
+            r.erase(i-k+1,k);      
             f=1;
         }
         
     }
    //cout<<r<<"\n";
-   if(f==1)
+   if(f==1)                                      // OR if(r!=s)
    {
        r=rem(r,k);
    }
