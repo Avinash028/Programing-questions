@@ -1,0 +1,37 @@
+/*
+A cricket player has to score N runs, with condition he can take either 1 or 2 runs only and consecutive runs should not be 2. Find all the possible combination he can take.
+Examples:
+Input : N = 4 
+Output : 4
+1+1+1+1, 1+2+1, 2+1+1, 1+1+2
+
+Input : N = 5
+Output : 6
+*/
+
+#include <iostream>
+
+using namespace std;
+
+int ways(int n,int f)
+{
+    if(n==0||n==1)
+        return 1;
+        
+    if(f==0)    
+        return ways(n-1,0)+ways(n-2,1);
+        
+    else
+        return ways(n-1,0);
+}
+
+int main()
+{
+    int n;
+    cin>>n;
+    
+    int ans=ways(n,0);
+    cout<<ans<<"\n";
+    
+    return 0;
+}
